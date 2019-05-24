@@ -4,31 +4,31 @@ import { Role } from "./models/role";
 import { Reimbursement } from "./models/reimbursement";
 import { ReimbursementStatus } from "./models/reimbursementStatus";
 
-export let users:User[] = [
+ export let users:User[] = [
     {
-    userId: 1,
+    user_id: 1,
 	username: 'ram',
 	password: 'r123',
-	firstName: 'Ram',
-	lastName: 'Thapa',
+	first_name: 'Ram',
+	last_name: 'Thapa',
 	email: 'r@gmail.com',
     role: ['admin'] 
     }, 
     {
-        userId: 2,
+        user_id: 2,
         username: 'hari',
         password: 'h123',
-        firstName: 'Hari',
-        lastName: 'Thapa',
+        first_name: 'Hari',
+        last_name: 'Thapa',
         email: 'h@gmail.com',
         role: ['employee'] 
         },
         {
-            userId: 3,
+            user_id: 3,
             username: 'suresh',
             password: 's123',
-            firstName: 'Suresh',
-            lastName: 'Basnet',
+            first_name: 'Suresh',
+            last_name: 'Basnet',
             email: 's@gmail.com',
             role: ['finance-manager'] 
             }
@@ -36,45 +36,45 @@ export let users:User[] = [
 ]
 
 export let roles:Role[] = [{
-    roleId: 1,
+    role_id: 1,
     role: ['finance-manager']
 },{
-    roleId: 2 ,
+    role_id: 2 ,
     role: ['employee'] 
 },{
-    roleId: 3 ,
+    role_id: 3 ,
     role: ['admin'] 
 }
 ]
 
 export let reimbursements: Reimbursement[] = [{
-    reimbursementId: 0, 
+    reimbursement_id: 0, 
 	author: 1, 
 	amount: 100,  
-    dateSubmitted: 1, 
-    dateResolved: 1, 
+    date_submitted: 1, 
+    date_resolved: 1, 
     description: '1', 
     resolver: 1,
     status: 1, 
     type: 1
 },
 {
-    reimbursementId: 1, 
+    reimbursement_id: 1, 
 	author: 2, 
 	amount: 200,  
-    dateSubmitted: 2, 
-    dateResolved: 2, 
+    date_submitted: 2, 
+    date_resolved: 2, 
     description: '2', 
     resolver: 2,
     status: 2, 
     type: 2
 },
 {
-    reimbursementId: 2, 
+    reimbursement_id: 2, 
 	author: 3, 
 	amount: 200,  
-    dateSubmitted: 2, 
-    dateResolved: 2, 
+    date_submitted: 2, 
+    date_resolved: 2, 
     description: '2', 
     resolver: 2,
     status: 3, 
@@ -84,13 +84,13 @@ export let reimbursements: Reimbursement[] = [{
 
 
 export let reimbursementStatuss:ReimbursementStatus[] = [{
-    statusId: 1,
+    status_id: 1,
     status: 'Pending'
 },{
-    statusId: 2,
+    status_id: 2,
     status: 'Approved'
 },{
-    statusId: 3,
+    status_id: 3,
     status: 'Denied'
 }
-]
+] 

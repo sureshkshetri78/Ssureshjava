@@ -1,11 +1,11 @@
 import {Pool} from 'pg'
 console.log({
-    user: process.env['REIM_API_USERNAME'],
-    host: process.env['REIM_API_HOST'],
-    database: process.env['REIM_API_DB_NAME'],
-    password: process.env['REIM_API_PASSWORD'],
+    user:process.env['REIM_API_USERNAME'],
+    host:process.env['REIM_API_HOST'],
+    database:process.env['REIM_API_DB_NAME'],
+    password:process.env['REIM_API_PASSWORD'],
     port: 5432,
-    max: 6 // max number of connections
+    max: 5 // max number of connections
 
 })
 

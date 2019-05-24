@@ -64,3 +64,26 @@ export async function findUserByUsernameAndPassword(username:string, password:st
         client && client.release()
     }
 }
+
+
+export async function updateUser(user_id:number, username: string, password: string, 
+    first_name: string, last_name: string, email: string,  role: string[]){
+    let client:PoolClient
+
+    try{
+        client = await connectionPool.connect()//await cause this is async
+        //this is how to write a paramaterized query
+        //we use $1, $2 ... to represent params
+        //we put all those params in an array and use it as the second argument
+        let result = await client.query(`UPDATE "reim_api".users SET username = $1, password_u = $2,
+        first_name = $3, last_name = $4, email = $5, roles = $6 WHERE user_id = $7  
+        returning username, password_u, first_name, last_name, email, roles, user_id`,
+        [user_id,username, password, first_name, last_name, email, role])
+        return sqlUsertojsUSer(result.rows[0])
+    } catch(err){//check for what kind of error and send back appropriate custom error
+        console.log(err)
+        return '500'
+    } finally {
+        client && client.release()
+    }
+}

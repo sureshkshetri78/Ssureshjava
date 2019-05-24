@@ -10,17 +10,11 @@ import { reimbursementsRouter } from './routers/reimbursement-router';
 
 const app = express()
 
-
-
 app.use(loggingMiddleware)
 
 app.use(bodyParser.json())
 
 app.use(sessionMiddleware)
-
-
-
-
 app.get('/', (req, res)=>{
     res.json('Try making a request to project 0')
 })
