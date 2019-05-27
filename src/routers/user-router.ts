@@ -9,12 +9,6 @@ export const userRouter = express.Router()
 userRouter.get('',[authorization(['finance-manager']),async (req, res)=>{
     res.json(await getAllUsersService())
 }])
-
-
-//Find Users By Id
-userRouter.get('/:id', [authorization(['finance-manager']), async (req, res)=>{
-    res.json(await getAllUsersService())
-}])
     
     
     //Find Users By Id
@@ -47,55 +41,21 @@ userRouter.post('/login', async (req, res)=>{
         //we send them their user object
     }})
 
-    /*
-    if(user){
-        req.session.user = user
-        res.send(req.session)// don't send them the session
-        //we send them their user object
-    } else{
-        res.status(400).send('Invalid Credentials Please re-enter')
-    }
-}) */
+    
 
 
-//updating a user
-/* userRouter.patch('/:id', [authorization(['admin']), (req, res) =>{
-    let id = +req.params.id
-    let user = users.find((u) =>{ 
-        return u.userId === id
-    })
-    if(user){
-        let {body} = req
-        for(let key in user ){//loop through all fields on user
-            if(!body[key]){//if they didn't give us one
-            res.status(400).send('please include all user fields')
-            break;
-            }else{
-                user[key] = body[key]//else set new field
-            }
-        }
-        res.json(user)
-    } else {
-        res.sendStatus(400)
-    }
-}])
-
-*/
+//updating user
 
 userRouter.patch('/:id', [authorization(['admin']), async(req, res)=>{
-    let user_id = +req.params.id
+    let userid = +req.params.id
     const { username, password, 
-            firstName, lastName, email, role} = req.body
-    // let user = users.find((u) =>{ 
-    //     return u.userId === id
-    // })
-
+            first_name, last_name, email, role} = req.body
     
-    if(isNaN(user_id)){
+    if(isNaN(userid)){
         res.sendStatus(400)
     }else{
-        let user:any = await updateUserService(user_id, username, password, 
-            firstName, lastName, email, role)
+        let user:any = await updateUserService(userid, username, password, 
+            first_name, last_name, email, role)
     if(user){
         let {body} = req
         for(let key in user ){//loop through all fields on user

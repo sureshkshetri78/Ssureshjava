@@ -7,14 +7,14 @@ import { findReimbursementByStatus, findReimbursementByUser, submitReimbursement
 
 
 //Find Reimbursements By Status/statusId
-export async function findReimbursementByStatusService(statusId:number){
-    return await findReimbursementByStatus(statusId)
+export async function findReimbursementByStatusService(status_id:number){
+    return await findReimbursementByStatus(status_id)
 }
 
 
 //Find Reimbursements By User/userId
-export async function findReimbursementByUserService(userId:number){
-    return await findReimbursementByUser(userId)
+export async function findReimbursementByUserService(user_id:number){
+    return await findReimbursementByUser(user_id)
 }
 
 //Submit Reimbursement

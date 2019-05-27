@@ -9,14 +9,14 @@ export async function getAllUsersService(){
     return await getAllUsers()
 }
 
-export async function findUserByIdService(userId:number){
-    return await findUserById(userId)
+export async function findUserByIdService(userid:number){
+    return await findUserById(userid)
 }
 
-export async function updateUserService(user_id:number, username: string, password: string, 
-    firstName: string, lastName: string, email: string,  role: string[]){
-    return await updateUser(user_id, username, password, 
-        firstName, lastName, email, role)
+export async function updateUserService(userid:number, username: string, password: string, 
+    first_name: string, last_name: string, email: string,  role: string[]){
+    return await updateUser(userid, username, password, 
+        first_name, last_name, email, role)
 }
 
 export async function findUserByUsernameAndPasswordService(req:Request, username:string, password:string){

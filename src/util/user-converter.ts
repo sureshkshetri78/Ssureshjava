@@ -4,5 +4,6 @@ import { UserDTO } from "../dtos/user.dto";
 
 export function sqlUsertojsUSer(sqluser:UserDTO):User{
     return new User(sqluser.user_id, sqluser.username, sqluser.password, sqluser.first_name,
-        sqluser.last_name, sqluser.email, sqluser.role.split(','))
+        sqluser.last_name, sqluser.email,
+         sqluser.role.split(','))
 }

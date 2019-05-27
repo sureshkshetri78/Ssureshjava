@@ -2,7 +2,7 @@
 export function authorization(authRoles:string[]) {
     return (req, res, next) => {
         let isAuth = false
-
+        
         if (!req.session.user) {
             res.sendStatus(401)
         }

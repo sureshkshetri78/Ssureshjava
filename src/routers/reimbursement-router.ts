@@ -2,7 +2,7 @@ import express from 'express'
 
 // import { reimbursements } from '../state';
 import { authorization } from '../middleware/auth.middleware';
-//import { Reimbursement } from '../models/reimbursement';
+// import { Reimbursement } from '../models/reimbursement';
 import { findReimbursementByStatusService, findReimbursementByUserService, 
     submitReimbursementService, updateReimbursementService } from '../service/utl/reimbursements.service';
 
@@ -11,10 +11,10 @@ export const reimbursementsRouter = express.Router()
 
 
 //Find Reimbursements By Status
-reimbursementsRouter.get('/status/:statusId',[authorization(['finance-manager']), async (req, res)=>{
+reimbursementsRouter.get('/status/:statusid',[authorization(['finance-manager']), async (req, res)=>{
 
     
-    let id = +req.params.statusId//id is string by default, adding the + turns to int
+    let id = +req.params.statusid//id is string by default, adding the + turns to int
 
 if(isNaN(id)){
     res.sendStatus(400)
@@ -32,11 +32,11 @@ if(isNaN(id)){
 
 
 //Find Reimbursements By User
-reimbursementsRouter.get('/author/userId/:userId', [authorization(['finance-manager', 'employee']), 
+reimbursementsRouter.get('/author/userid/:userid', [authorization(['finance-manager', 'employee']), 
 async (req, res)=>{
 
     
-    let id = +req.params.userId//id is string by default, adding the + turns to int
+    let id = +req.params.userid //id is string by default, adding the + turns to int
 
 if(isNaN(id)){
     res.sendStatus(400)
@@ -56,14 +56,14 @@ if(isNaN(id)){
 //Update Reimbursement
 reimbursementsRouter.patch('/:id', [authorization(['finance-manager']), async (req, res) =>{
  
-const { reimbursement_id, author, amount, 
-    dateSubmitted, dateResolved, description, resolver, status, reimbursement_type_num} = req.body
+const { reimbursementid, author, amount, 
+    date_submitted, date_resolved, description, resolver, status, type } = req.body
 
-if(isNaN(reimbursement_id)){
+if(isNaN(reimbursementid)){
     res.sendStatus(400)
 }else{
-    let reimbursement:any = await updateReimbursementService(reimbursement_id, author, amount, 
-        dateSubmitted, dateResolved, description, resolver, status, reimbursement_type_num)
+    let reimbursement:any = await updateReimbursementService(reimbursementid, author, amount, 
+        date_submitted, date_resolved, description, resolver, status, type)
 if(reimbursement){
     let {body} = req
     for(let key in reimbursement ){//loop through all fields on user
@@ -93,7 +93,7 @@ reimbursementsRouter.post('', async (req, res)=>{
         description: '' ,
         resolver: '',
         status: '',
-        reimbursement_type_num: ''
+        type: ''
     }
     
     for(let key in checks ){//loop through all fields on user

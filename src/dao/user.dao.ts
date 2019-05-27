@@ -13,7 +13,7 @@ export async function getAllUsers(){
     try{
         client = await connectionPool.connect()//await says, wait for the promise to resolve
         //all code beneath the await will become a callback after the await is done
-        let result = await client.query('SELECT * FROM reim_api.users')
+        let result = await client.query('SELECT * FROM "reim_api".users')
         return result.rows.map(sqlUsertojsUSer)
     }catch(err){
         console.log(err); 
@@ -24,7 +24,7 @@ export async function getAllUsers(){
 }
 
 
-export async function findUserById(userId:number){
+export async function findUserById(userid:number){
     let client:PoolClient
 
     try{
@@ -32,7 +32,7 @@ export async function findUserById(userId:number){
         //this is how to write a paramaterized query
         //we use $1, $2 ... to represent params
         //we put all those params in an array and use it as the second argument
-        let result = await client.query(`SELECT * FROM reim_api.users WHERE user_id = $1`, [userId])
+        let result = await client.query(`SELECT * FROM "reim_api".users WHERE user_id = $1`, [userid])
         return sqlUsertojsUSer(result.rows[0])
     } catch(err){//check for what kind of error and send back appropriate custom error
         console.log(err)
@@ -50,7 +50,7 @@ export async function findUserByUsernameAndPassword(username:string, password:st
 
     try{
         client = await connectionPool.connect()
-        let query = 'SELECT * FROM reim_api.users WHERE username = $1 and password = $2'
+        let query = 'SELECT * FROM "reim_api".users WHERE username = $1 and password = $2'
         let result = await client.query(query, [username, password])
         if(!result.rows[0]){
             return 'User not found'
@@ -66,7 +66,7 @@ export async function findUserByUsernameAndPassword(username:string, password:st
 }
 
 
-export async function updateUser(user_id:number, username: string, password: string, 
+export async function updateUser(userid:number, username: string, password: string, 
     first_name: string, last_name: string, email: string,  role: string[]){
     let client:PoolClient
 
@@ -75,10 +75,9 @@ export async function updateUser(user_id:number, username: string, password: str
         //this is how to write a paramaterized query
         //we use $1, $2 ... to represent params
         //we put all those params in an array and use it as the second argument
-        let result = await client.query(`UPDATE "reim_api".users SET username = $1, password_u = $2,
-        first_name = $3, last_name = $4, email = $5, roles = $6 WHERE user_id = $7  
-        returning username, password_u, first_name, last_name, email, roles, user_id`,
-        [user_id,username, password, first_name, last_name, email, role])
+        let result = await client.query(`UPDATE "reim_api".users SET username = $1, password = $2, first_name = $3, last_name = $4, email = $5, roles = $6 WHERE user_id = $7  
+        returning username, password, first_name, last_name, email, role, user_id`,
+        [username, password, first_name, last_name, email, role,userid])
         return sqlUsertojsUSer(result.rows[0])
     } catch(err){//check for what kind of error and send back appropriate custom error
         console.log(err)
